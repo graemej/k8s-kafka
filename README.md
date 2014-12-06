@@ -1,6 +1,6 @@
 # k8s-kafka
 
-Docker container to run `kafka` (0.8.1.1) in an Ubuntu 14.04 container with configuration settings from the environment.
+Docker container to run `kafka` (0.8.1.1) in an Ubuntu container (java7) with configuration settings from the environment.
 
 ## environment
 
