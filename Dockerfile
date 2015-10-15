@@ -10,7 +10,9 @@ MAINTAINER Graeme Johnson <graeme@johnson-family.ca>
 RUN \
   mkdir /kafka /data /logs && \
   apt-get update && \
-  DEBIAN_FRONTEND=noninteractive apt-get install -y ca-certificates
+  DEBIAN_FRONTEND=noninteractive apt-get install -y ca-certificates && \
+  useradd -d /kafka -s /bin/false -m kafka && \
+  chown -R kafka. /kafka /data/logs
 
 ENV KAFKA_RELEASE_ARCHIVE kafka_2.10-0.8.1.1.tgz
 
@@ -34,9 +36,6 @@ ADD config /kafka/config
 ADD config-and-run.sh /kafka/
 
 # Set up a user to run Kafka
-RUN groupadd kafka && \
-  useradd -d /kafka -g kafka -s /bin/false kafka && \
-  chown -R kafka:kafka /kafka /data /logs
 USER kafka
 ENV PATH /kafka/bin:$PATH
 WORKDIR /kafka
